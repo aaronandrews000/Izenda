@@ -1,0 +1,65 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Izenda Patients</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+    <form name="addPatientForm" id="testForm" method="POST">
+        First Name: <input type="text" name="first_name" value="test" />
+        Last Name: <input type="text" name="last_name" value="test" />
+        <br />
+        email: <input type="text" name="email" value="test" />
+        gender: <input type="text" name="gender" value="test" />
+        <br />
+        street address: <input type="text" name="street_address" value="test" />
+        state: <input type="text" name="state" value="test" />
+        drug: <input type="text" name="drug" value="test" />
+    </form>
+
+    <input type="button" id="submitForm" value="Add Patient" />
+
+    <br /><br />
+
+    <table id="patientsTable" border='1'>
+        <tr>
+            <th>id</th>
+            <th>first_name</th>
+            <th>last_name</th>
+            <th>email</th>
+            <th>gender</th>
+            <th>street_address</th>
+            <th>state</th>
+            <th>drug</th>
+        </tr>
+    </table>
+
+
+    <script>
+
+        $.getJSON("https://izenda.herokuapp.com/patients",
+                function (data) {
+                    $.each(data, function (i, item) {
+                        $('<tr>').append(
+                            $('<td>').text(item.id),
+                            $('<td>').text(item.first_name),
+                            $('<td>').text(item.last_name),
+                            $('<td>').text(item.email),
+                            $('<td>').text(item.gender),
+                            $('<td>').text(item.street_address),
+                            $('<td>').text(item.state),
+                            $('<td>').text(item.drug)
+                        ).appendTo('#patientsTable');
+
+                    });
+                });
+
+    </script>
+
+</body>
+</html>
